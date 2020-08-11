@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url('/static/credit.JPG');
+            background-size: 1366px 810px;
+            font-family: sans-serif;
+        }
+
+
+
+
+        input {
+            width: 40%;
+            padding: 10px 5px;
+            margin: 10px 10px;
+            box-sizing: border-box;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            margin-left: 380px;
+            margin-right: 50px;
+
+        }
+         select{
+            width: 40%;
+            padding: 10px 5px;
+            margin: 10px 10px;
+            box-sizing: border-box;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            margin-left: 380px;
+            margin-right: 50px;
+
+       }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <h1 style="text-align: center; color: rgb(255, 0, 0);margin-top: 1.5%;margin-bottom: 1.5%"><b>Credit Card Revolving Balance Prediction</b></h1>
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('predict')}}" method="post">
+           
+            <input type="text" name="loan_amnt" placeholder="Loan Amount" required="required" />
+
+
+            
+            <select class="form-input align-center" name="terms">
+                    <option value="">Select terms:  term of loan (in months)</option>
+                    <option value="36 months">36 months</option>
+                    <option value="60 months">60 months</option>
+            </select>
+            <input type="text" name="Rate_of_intrst" placeholder="Rate Of Interest" required="required" />
+
+           
+            <select class="form-input align-center" name="grade">
+                    <option value="">Select Grade:assigned by the bank</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+            </select>
+
+
+            <select class="form-input align-center" name="home_ownership">
+                    <option value="">Select Type Of Home Ownership</option>
+                    <option value="ANY">ANY</option>
+                    <option value="MORTGAGE">MORTGAGE</option>
+                    <option value="NONE">NONE</option>
+                    <option value="OTHER">OTHER</option>
+                    <option value="OWN">OWN</option>
+                    <option value="RENT">RENT</option>
+            </select>
+            <input type="text" name="annual_inc" placeholder="Annual Income" required="required" />
+           
+            <select class="form-input align-center" name="verification_status">
+                     <option value="">Select Verification Status:status of income verified by the bank</option>
+                    <option value="Not Verified">Not Verified</option>
+                    <option value="Source Verified">Source Verified</option>
+                    <option value="Verified">Verified</option>
+            </select>
+            <select class="form-input align-center" name="purpose">
+                    <option value="">Select Purpose:purpose of loan</option>
+                    <option value="credit_card">credit_card</option>
+                    <option value="debt_consolidation">debt_consolidation</option>
+                    <option value="home_improvement">home_improvement</option>
+                    <option value="major_purchase">major_purchase</option>
+                    <option value="medical(or)education">medical(or)education</option>
+                    <option value="other">other</option>
+                    <option value="small_business">small_business</option>
+            </select>
+
+            <input type="text" name="debt_income_ratio" placeholder="debt-to-income ratio : ratio of member's total monthly debt" required="required" />
+            <input type="text" name="delinq_2yrs" placeholder="Delinquency of past 2 years : failure to pay debt by due date" required="required" />
+            <input type="text" name="inq_last_6mths" placeholder="Inquiries made in past 6 months" required="required" />
+            <input type="text" name="numb_credit" placeholder="number of open credit line in member's credit line" required="required" />
+            <input type="text" name="pub_rec" placeholder="number of derogatory public records" required="required" />
+            <input type="text" name="total_credits" placeholder="total number of credit lines available in" required="required" />
+
+            <select class="form-input align-center" name="initial_list_status">
+                    <option value="">Select status of the loan - w(waiting),f(forwarded)</option>
+                    <option value="f">f</option>
+                    <option value="w">w</option>
+            </select>
+            <input type="text" name="total_rec_int" placeholder="Total interest received till date" required="required" />
+            <input type="text" name="total_rec_late_fee" placeholder="Late fee received till date" required="required" />
+            <input type="text" name="recoveries" placeholder="No. of recoveries" required="required" />
+
+            <select class="form-input align-center" name="Experience">
+                    <option value="">Select Experience of the customer</option>
+                    <option value="< 1 year">< 1 year</option>
+                    <option value="1 year">1 year</option>
+                    <option value="2 years">2 years</option>
+                    <option value="3 years">3 years</option>
+                    <option value="4 years">4 years</option>
+                    <option value="5 years">5 years</option>
+                    <option value="6 years">6 years</option>
+                    <option value="7 years">7 years</option>
+                    <option value="8 years">8 years</option>
+                    <option value="9 years">9 years</option>
+                    <option value="10+ years">10+ years</option>
+            </select>
+
+            <input type="text" name="mths_since_last_delinq" placeholder="number of months since last delinq" required="required" />
+            <input type="text" name="tot_curr_bal" placeholder="total current balance of all accounts" required="required" />
+            <input type="text" name="tot_colle_amt" placeholder="total collection amount ever owed" required="required" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div style=" position:relative;top:50%; left:40%;">
+                <button type="submit"class="btn btn-primary" style="margin-top: 0.5%;">Predict Revolving Balance</button>
+            </div>
+
+        </form>
+        <br>
+           
+                <h1 style="text-align:center; color:rgb(82, 199, 80);"><b>{{ prediction_text }}</b></h1>
+
+
+    </div>
+ <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.footer {
+   position:;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 100px;
+  background-image: linear-gradient(to right, rgba(0,255,0,0), rgba(255,0,0,1));
+
+   color: black;
+   text-align: left;
+}
+</style>
+</head>
+<body>
+
+<div class="footer">
+    <p><i><b>A Machine Learning Web App To Predict the Credit Card Revolving Balance Build With Flask by :-- Saket Nandan,Pooja Hegde,Shilpa Achary,Aditya ,Nitin ,Nikansha Jain, Sweta Padmadalai
+ </b></i></p>
+
+ <p><i><b>Mentors :-- Munmun B, Dileep Reddy</b></i></p>
+</div>
+
+</body>
+</body>
+
+</html>
